@@ -149,6 +149,10 @@ namespace Pomodoro
         {
           StopTimer();
           ShowStoppedMenu();
+          
+          System.Media.SoundPlayer chime = new System.Media.SoundPlayer(@"chime.wav");
+          chime.Play();
+          
           MessageBox.Show("Time's up!", "Pomodoro Timer", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         }
         else
