@@ -1,8 +1,14 @@
-﻿/* Copyright 2016 (C) Xeno Innovations, Inc.
+﻿/* Copyright 2016-2017 (C) Xeno Innovations, Inc.
  * Author: Damian Suess
  * Description:
+ *  Cheap pomodoro timer
+ * 
+ * To Do:
+ *  [ ] Move the Application.Run to its own file
+ *  [ ] Clean up the code.. other people have to look at this. This is ugly
  * 
  * Change Log:
+ *  2016-0111 + [DJS] Added sound and repeatable. Cleaned up code.
  *  2015-0106 + [DJS] Updated tray icon., old one was unreadable & ugly
  */
 
@@ -25,18 +31,22 @@ namespace Pomodoro
 
     private TextIcon[] _numberIcons;
 
-    private System.Timers.Timer timer;
-    private bool running = false;
-    private int elapsedTime = 0;
+    private System.Timers.Timer _timer;
+    private bool _running = false;
+    private int _elapsedTime = 0;
+    private int _minutesToWait;
 
-    private const int pomorodoMinutesToWait = 25;
-    private const int shortBreakMinutesToWait = 5;
-    private const int longBreakMinutesToWait = 15;
+    private const int PomorodoMinutesToWait = 25;
+    private const int ShortBreakMinutesToWait = 5;
+    private const int LongBreakMinutesToWait = 15;
 
-    private int minutesToWait;
+    #region Initialization
 
     public PomodoroTimer()
     {
+      //PlaySound();     // Uncomment to test sound
+      //PlaySound(3);    // Uncomment to test sound
+
       InitializeMenu();
       ShowStoppedMenu();
 
@@ -44,9 +54,21 @@ namespace Pomodoro
       InitializeIcon();
     }
 
-    private void PomodoroTimer_Load(object sender, EventArgs e)
-    {
-    }
+    //private void InitializeComponent()
+    //{
+    //  this.SuspendLayout();
+    //  //
+    //  // PomodoroTimer
+    //  //
+    //  this.ClientSize = new System.Drawing.Size(284, 261);
+    //  this.Name = "PomodoroTimer";
+    //  this.Load += new System.EventHandler(this.PomodoroTimer_Load);
+    //  this.ResumeLayout(false);
+    //}
+    //
+    //private void PomodoroTimer_Load(object sender, EventArgs e)
+    //{
+    //}
 
     private void CreateNumberIcons()
     {
@@ -82,6 +104,24 @@ namespace Pomodoro
       _trayMenu.MenuItems.Add("Exit", OnExit);
     }
 
+
+    private void DefaultIcon()
+    {
+
+      TextIcon newIcon = new Pomodoro.TextIcon("Σ");
+
+      _trayIcon.Icon = newIcon.Get();
+    }
+
+    private void TextIcon(int number)
+    {
+      _trayIcon.Icon = _numberIcons[number - 1].Get();
+    }
+
+    #endregion Initialization
+
+    #region Event Handlers
+
     protected override void OnLoad(EventArgs e)
     {
       Visible = false; // Hide form window.
@@ -92,19 +132,19 @@ namespace Pomodoro
 
     private void OnStartPomodoro(object sender, EventArgs e)
     {
-      StartTimer(pomorodoMinutesToWait);
+      StartTimer(PomorodoMinutesToWait);
       ShowRunningMenu();
     }
 
     private void OnStartShortBreak(object sender, EventArgs e)
     {
-      StartTimer(shortBreakMinutesToWait);
+      StartTimer(ShortBreakMinutesToWait);
       ShowRunningMenu();
     }
 
     private void OnStartLongBreak(object sender, EventArgs e)
     {
-      StartTimer(longBreakMinutesToWait);
+      StartTimer(LongBreakMinutesToWait);
       ShowRunningMenu();
     }
 
@@ -119,56 +159,80 @@ namespace Pomodoro
       ShowStoppedMenu();
     }
 
+    private void OnExit(object sender, EventArgs e)
+    {
+      if (_timer != null) _timer.Stop();
+      Application.Exit();
+    }
+
+    protected override void Dispose(bool isDisposing)
+    {
+      if (isDisposing)
+      {
+        // Release the icon resource.
+        _trayIcon.Dispose();
+      }
+
+      base.Dispose(isDisposing);
+    }
+
+    #endregion Actions
+
+    #region Timers
+
     private void StartTimer(int minutes)
     {
-      elapsedTime = 0;
-      timer = new System.Timers.Timer();
-      timer.Interval = 1000; // timer fires every 1s
-      timer.Elapsed += TimerFired;
-      timer.Start();
-      running = true;
+      _elapsedTime = 0;
+      _timer = new System.Timers.Timer();
+      _timer.Interval = 1000; // timer fires every 1s
+      _timer.Elapsed += TimerFired;
+      _timer.Start();
+      _running = true;
 
-      minutesToWait = minutes;
+      _minutesToWait = minutes;
       TextIcon(minutes);
+    }
+
+    private void StopTimer()
+    {
+      _timer.Stop();
+      _running = false;
+      DefaultIcon();
     }
 
     private void ToggleTimerPaused()
     {
-      running = !running;
+      _running = !_running;
     }
 
     private void TimerFired(object sender, System.Timers.ElapsedEventArgs e)
     {
-      if (running)
+      if (_running)
       {
         // for simplicity assume that the exact amount of the timer's interval has passed
         // in practice, the actual elapsed time will probably be more than the interval
-        elapsedTime += (int)timer.Interval;
+        _elapsedTime += (int)_timer.Interval;
 
-        if (elapsedTime > (minutesToWait * 60 * 1000))
+        if (_elapsedTime > (_minutesToWait * 60 * 1000))
         {
           StopTimer();
           ShowStoppedMenu();
           
-          System.Media.SoundPlayer chime = new System.Media.SoundPlayer(@"chime.wav");
-          chime.Play();
+          PlaySound(3);
           
           MessageBox.Show("Time's up!", "Pomodoro Timer", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         }
         else
         {
-          int minutesRemaining = minutesToWait - (elapsedTime / 60 / 1000);
+          int minutesRemaining = _minutesToWait - (_elapsedTime / 60 / 1000);
           TextIcon(minutesRemaining);
         }
       }
     }
+    
+    #endregion
 
-    private void StopTimer()
-    {
-      timer.Stop();
-      running = false;
-      DefaultIcon();
-    }
+    #region Private Methods
 
     private void ShowStoppedMenu()
     {
@@ -192,46 +256,30 @@ namespace Pomodoro
       _trayMenu.MenuItems[5].Enabled = true;
     }
 
-    private void OnExit(object sender, EventArgs e)
+    private void PlaySound(uint repeat=1)
     {
-      if (timer != null) timer.Stop();
-      Application.Exit();
-    }
-
-    protected override void Dispose(bool isDisposing)
-    {
-      if (isDisposing)
+      try
       {
-        // Release the icon resource.
-        _trayIcon.Dispose();
+        for (uint times = 1; times <= repeat; ++times)
+        {
+          System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
+          System.IO.Stream s = a.GetManifestResourceStream("Pomodoro.chime.wav");
+          
+          // Place in a "using" and called via, PlaySync() so that we can call the sound multiple times
+          using (System.Media.SoundPlayer player = new System.Media.SoundPlayer(s))
+          { 
+            player.PlaySync();
+          }
+
+          //System.Media.SoundPlayer chime = new System.Media.SoundPlayer(@"chime.wav");    // Play physical file
+          //WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();            // Play MP3
+          //wplayer.URL = "chime.mp3";
+          //wplayer.controls.play();
+        }
       }
-
-      base.Dispose(isDisposing);
+      catch { }
     }
 
-    private void DefaultIcon()
-    {
-
-      TextIcon newIcon = new Pomodoro.TextIcon("Σ");
-      
-      _trayIcon.Icon = newIcon.Get();
-    }
-
-    private void TextIcon(int number)
-    {
-      _trayIcon.Icon = _numberIcons[number - 1].Get();
-    }
-
-    private void InitializeComponent()
-    {
-      this.SuspendLayout();
-      //
-      // PomodoroTimer
-      //
-      this.ClientSize = new System.Drawing.Size(284, 261);
-      this.Name = "PomodoroTimer";
-      this.Load += new System.EventHandler(this.PomodoroTimer_Load);
-      this.ResumeLayout(false);
-    }
+    #endregion Private Methods
   }
 }

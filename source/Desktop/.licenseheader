@@ -1,6 +1,6 @@
 ﻿extensions: designer.cs generated.cs
 extensions: .cs .cpp .h
-/* Copyright 2016 (C) Xeno Innovations, Inc.
+/* Copyright 2016-2017 (C) Xeno Innovations, Inc.
  * Author: Damian Suess
  * Description:
  * 
@@ -8,13 +8,7 @@ extensions: .cs .cpp .h
  *  
  */
 
-extensions: .aspx .ascx
-<%-- 
-Sample license text.
---%>
-extensions: .vb
-'Sample license text.
 extensions:  .xml .config .xsd
 <!--
-Sample license text.
+Copyright 2016-2017 (C) Xeno Innovations, Inc.
 -->

@@ -11,7 +11,7 @@ using System.Drawing;
 
 namespace Pomodoro
 {
-  class TextIcon
+  public class TextIcon
   {
     private Brush brush1 = new SolidBrush(Color.Black);
     private Brush brush2 = new SolidBrush(Color.Red);
