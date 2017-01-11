@@ -39,6 +39,11 @@ namespace Pomodoro
     private const int PomorodoMinutesToWait = 25;
     private const int ShortBreakMinutesToWait = 5;
     private const int LongBreakMinutesToWait = 15;
+    
+
+    // Create a new app settings feature for this
+    private bool _settingPlaySound = true;
+    private bool _settingShowMsgBox = false;
 
     #region Initialization
 
@@ -54,22 +59,6 @@ namespace Pomodoro
       InitializeIcon();
     }
 
-    //private void InitializeComponent()
-    //{
-    //  this.SuspendLayout();
-    //  //
-    //  // PomodoroTimer
-    //  //
-    //  this.ClientSize = new System.Drawing.Size(284, 261);
-    //  this.Name = "PomodoroTimer";
-    //  this.Load += new System.EventHandler(this.PomodoroTimer_Load);
-    //  this.ResumeLayout(false);
-    //}
-    //
-    //private void PomodoroTimer_Load(object sender, EventArgs e)
-    //{
-    //}
-
     private void CreateNumberIcons()
     {
       _numberIcons = new TextIcon[25];
@@ -83,7 +72,6 @@ namespace Pomodoro
     {
       _trayIcon = new NotifyIcon();
       _trayIcon.Text = "Pomodoro Timer";
-      //_trayIcon.Icon = new Icon(SystemIcons.Application, 40, 40);
       this.DefaultIcon();
 
       // Add menu to tray icon and show it.
@@ -107,13 +95,15 @@ namespace Pomodoro
 
     private void DefaultIcon()
     {
+      string iconChar = "Σ";
+      //string iconChar = "🍅";         // Shows up as a square on Win10 due to a bug in .Net GDI
+      //string iconChar = "\uDF45";     // '🍅' http://www.fileformat.info/info/unicode/char/1f345/index.htm
 
-      TextIcon newIcon = new Pomodoro.TextIcon("Σ");
-
+      TextIcon newIcon = new Pomodoro.TextIcon(iconChar);
       _trayIcon.Icon = newIcon.Get();
     }
 
-    private void TextIcon(int number)
+    private void SetTextIcon(int number)
     {
       _trayIcon.Icon = _numberIcons[number - 1].Get();
     }
@@ -190,7 +180,7 @@ namespace Pomodoro
       _running = true;
 
       _minutesToWait = minutes;
-      TextIcon(minutes);
+      SetTextIcon(minutes);
     }
 
     private void StopTimer()
@@ -220,12 +210,13 @@ namespace Pomodoro
           
           PlaySound(3);
           
-          MessageBox.Show("Time's up!", "Pomodoro Timer", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+          if (_settingShowMsgBox)
+            MessageBox.Show("Time's up!", "Pomodoro Timer", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         }
         else
         {
           int minutesRemaining = _minutesToWait - (_elapsedTime / 60 / 1000);
-          TextIcon(minutesRemaining);
+          SetTextIcon(minutesRemaining);
         }
       }
     }
@@ -258,6 +249,9 @@ namespace Pomodoro
 
     private void PlaySound(uint repeat=1)
     {
+      if (_settingPlaySound)
+        return;
+
       try
       {
         for (uint times = 1; times <= repeat; ++times)
