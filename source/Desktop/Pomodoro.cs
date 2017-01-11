@@ -193,6 +193,21 @@ namespace Pomodoro
     private void ToggleTimerPaused()
     {
       _running = !_running;
+
+      if (!_running)
+      {
+        TextIcon newIcon = new Pomodoro.TextIcon("||");
+        _trayIcon.Icon = newIcon.Get();
+
+        _trayMenu.MenuItems[4].Text = "Resume";
+      }
+      else
+      {
+        int minutesRemaining = _minutesToWait - (_elapsedTime / 60 / 1000);
+        SetTextIcon(minutesRemaining);
+        _trayMenu.MenuItems[4].Text = "Pause";
+      }
+
     }
 
     private void TimerFired(object sender, System.Timers.ElapsedEventArgs e)
