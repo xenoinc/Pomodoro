@@ -1,11 +1,11 @@
 ﻿/* Copyright 2016 (C) Xeno Innovations, Inc.
  * Author: Damian Suess
  * Description:
- * 
+ *
  * Change Log:
  *  2015-0106 + [DJS] Updated tray icon, old one was unreadable & ugly
  */
- 
+
 using System;
 using System.Drawing;
 
@@ -43,6 +43,5 @@ namespace Pomodoro
       _brushAccent = null;
       _brushColor = null;
     }
-
   }
 }

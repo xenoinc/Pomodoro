@@ -1,14 +1,43 @@
-﻿extensions: designer.cs generated.cs
-extensions: .cs .cpp .h
-/* Copyright 2016-2017 (C) Xeno Innovations, Inc.
- * Author: Damian Suess
+﻿extensions: .cs .cpp .h .sql
+/* Copyright Xeno Innovations, Inc. 2017
+ * Author:  Damian Suess
+ * Date:    %CurrentYear%-%CurrentMonth%-%CurrentDay%
+ * File:    %FileName%
  * Description:
- * 
- * Change Log:
  *  
+ * To Do:
+ * Change Log:
+ *  %CurrentYear%-%CurrentMonth%%CurrentDay% * Initial creation
  */
 
-extensions:  .xml .config .xsd
+extensions: .aspx .ascx
+<%-- 
+  Copyright Xeno Innovations, Inc. 2017
+  Author:  Damian Suess
+  Date:    %CurrentYear%-%CurrentMonth%-%CurrentDay%
+  File:    %FileName%
+  Description:
+
+  To Do:
+  Change Log:
+    %CurrentYear%-%CurrentMonth%%CurrentDay% * Initial creation
+--%>
+
+extensions: .vb
+' Copyright Xeno Innovations, Inc. 2017
+' Author: Damian Suess
+' Date:   %CurrentYear%-%CurrentMonth%-%CurrentDay%
+' File:   %FileName%
+
+extensions:  .xml .config .xsd .xaml
 <!--
-Copyright 2016-2017 (C) Xeno Innovations, Inc.
+Copyright Xeno Innovations, Inc. 2017
+ * Author:  Damian Suess
+ * Date:    %CurrentYear%-%CurrentMonth%-%CurrentDay%
+ * File:    %FileName%
+ * Description:
+ *  
+ * To Do:
+ * Change Log:
+ *  %CurrentYear%-%CurrentMonth%%CurrentDay% * Initial creation
 -->

@@ -8,19 +8,10 @@ Simple desktop Pomodoro timer that sits in your system tray's icons.
 * Pause/Stop/Start
 
 
-
-# TDL-Pomodoro
-
-This ToDoList plug-in is currently under heavy development and not considered ready for use by the public.
-
-## Project Goals
-The simple go is to create a Pomodoro Timer (Tomato Timer) which can be used with the ToDoList application  
-
-
 ## Pomodoro Technique
 Pomodoro (/Po-mo`-do-ro/)simply means, tomato in Italian.
 
-The **Pomodoro Technique** is a time management metnod developed by Francesco Cirillo in the late 1980s. The technique uses a timer to break down work into intervals, traditionally 20 minutes in length, separated by short breaks. These intervals are called **pomodoros**, the plural in English of the Italian word _pomodoro_, which means **tomato**. The method is based on the idea that frequent breaks can improve mental agility.
+The **Pomodoro Technique** is a time management method developed by Francesco Cirillo in the late 1980s. The technique uses a timer to break down work into intervals, traditionally 20 minutes in length, separated by short breaks. These intervals are called **pomodoros**, the plural in English of the Italian word _pomodoro_, which means **tomato**. The method is based on the idea that frequent breaks can improve mental agility.
 
 More information can be found at [PomodoroTechnique.com](http://pomodorotechnique.com/), or just read about it on Wikipedia.
 
@@ -46,3 +37,27 @@ More information can be found at [PomodoroTechnique.com](http://pomodorotechniqu
 5. Copy just ToDoList.exe to the location in the error message. DO NOT MODIFY THE PATH IN THE PROJECT FILE.
 6. Re-run the solution and ToDoList should now appear
 7. 'Tools > Export Tasks' and 'Sample (.smp)' should appear in the 'Format' droplist
+
+
+# TDL-Pomodoro
+
+One day, I'll add this plug-in for ToDoList by Abstractspoon (_GREAT UTILITY_).
+
+## Project Goals
+The simple go is to create a Pomodoro Timer (Tomato Timer) which can be used with the ToDoList application  
+
+
+# Change Log
+
+### 1.1.17091.43
+* Chime fixes
+* Added some lost code from late January and February. Forgot to PUSH & drive became corrupted.
+* Holy crap this thing is much more pretty now!
+* Added GUI notifications to flash symbols on the screen during state changes.
+    * Useful for when audio is unavailable. The old MsgBox was an annoying modal.
+    
+### 1.1.17011.3
+* Added chime sounds to end of 25min run.
+    
+### 1.0 - 2016
+* Basic features. Needed a quick timer project pronto

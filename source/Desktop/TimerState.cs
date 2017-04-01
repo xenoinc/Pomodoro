@@ -1,9 +1,11 @@
-﻿/* Copyright 2016-2017 (C) Xeno Innovations, Inc.
- * Author: Damian Suess
+﻿/* Copyright Xeno Innovations, Inc. 2017
+ * Author:  Damian Suess
+ * Date:    2017-4-1
+ * File:    TimerState.cs
  * Description:
- *  Timer state enumeration
+ *
  * Change Log:
- *  
+ *  2017-0401 * Initial creation
  */
 
 namespace Pomodoro
@@ -12,10 +14,13 @@ namespace Pomodoro
   {
     /// <summary>Timer started</summary>
     Start,
+
     /// <summary>Timer paused</summary>
     Pause,
+
     /// <summary>Timer stopped</summary>
     Stop,
+
     /// <summary>Timer finished</summary>
     Done
   };

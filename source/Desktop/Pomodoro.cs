@@ -175,26 +175,33 @@ namespace Pomodoro
 
     private void NotifyStateChange(TimerState state)
     {
-      //TODO: Create animations on background thread
       switch (state)
       {
         case TimerState.Start:
-          // Single flash alpha-trans form on screen
+          // Single flash alpha-trans form on screen - (0%->50%) x1
+          UiNotify.Flicker(1, TimerState.Start);
           PlaySound(1);
           break;
 
         case TimerState.Pause:
           // Fade in alpha-trans form as "pause" (2 rectangle forms)
+          UiNotify.Flicker(1, TimerState.Pause);
           break;
 
         case TimerState.Stop:
           // Fade in alpha-trans form as square
+          UiNotify.Flicker(1, TimerState.Stop);
           break;
 
         case TimerState.Done:
-          // Double flash alpha-trans form on screen
-          // 25%->50%->75%->50%->75%->25%
+          // Double flash alpha-trans form on screen - (0%->50%) x3
+
+          UiNotify.Flicker(3, TimerState.Done);
           PlaySound(3);
+
+          if (_settingShowMsgBox)
+            MessageBox.Show("Time's up!", "Pomodoro Timer", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
           break;
 
         default: break;
@@ -260,10 +267,10 @@ namespace Pomodoro
           StopTimer();
           ShowStoppedMenu();
 
-          PlaySound(3);
-
-          if (_settingShowMsgBox)
-            MessageBox.Show("Time's up!", "Pomodoro Timer", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+          NotifyStateChange(TimerState.Done);
+          //PlaySound(3);
+          //if (_settingShowMsgBox)
+          //  MessageBox.Show("Time's up!", "Pomodoro Timer", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         }
         else
         {
