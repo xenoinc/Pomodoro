@@ -1,15 +1,18 @@
-﻿/* Copyright 2016-2017 (C) Xeno Innovations, Inc.
+﻿/* Copyright 2015-2017 (C) Xeno Innovations, Inc.
  * Author: Damian Suess
+ * Date: 2015-0106
  * Description:
  *  Cheap pomodoro timer
  *
  * To Do:
+ *  [ ] Use a basic .config file - had this before but code was lost... damn you McAfee!
  *  [ ] Move the Application.Run to its own file
  *  [ ] Clean up the code.. other people have to look at this. This is ugly
  *
  * Change Log:
- *  2016-0111 + [DJS] Added sound and repeatable. Cleaned up code.
- *  2015-0106 + [DJS] Updated tray icon., old one was unreadable & ugly
+ *  2017-0401 + Added UI notifications [DJS]
+ *  2016-0111 + Added sound and repeatable. Cleaned up code. [DJS]
+ *  2015-0106 + Updated tray icon., old one was unreadable & ugly [DJS]
  */
 
 using System;
@@ -103,6 +106,9 @@ namespace Pomodoro
 
     private void SetTextIcon(int number)
     {
+      if (number - 1 < 0)
+        number = 1;
+
       _trayIcon.Icon = _numberIcons[number - 1].Get();
     }
 
@@ -122,6 +128,7 @@ namespace Pomodoro
     {
       StartTimer(PomorodoMinutesToWait);
       NotifyStateChange(TimerState.Start);
+      //NotifyStateChange(TimerState.Done);   // Here for debugging only
       ShowRunningMenu();
     }
 

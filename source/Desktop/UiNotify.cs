@@ -40,6 +40,7 @@ namespace Pomodoro
           Size = _defaultFormSize,
           StartPosition = FormStartPosition.CenterScreen,
           WindowState = System.Windows.Forms.FormWindowState.Maximized,
+          TopMost = true
         })
       {
         CutFormRegion(form, state);

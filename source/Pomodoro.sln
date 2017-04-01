@@ -1,20 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopTimer", "Desktop\DesktopTimer.csproj", "{26DBD944-1A0C-4F4D-9208-81614680BEB0}"
 EndProject
 Global
-	GlobalSection(AutomaticVersions) = postSolution
-		AssemblyInfoFilePath = Properties\AssemblyInfo.cs
-		UpdateAssemblyVersion = True
-		UpdateAssemblyFileVersion = True
-		UpdateAssemblyInfoVersion = True
-		AssemblyVersionSettings = None.None.DateStamp.Increment
-		AssemblyFileVersionSettings = None.None.DateStamp.Increment
-		AssemblyInfoVersionSettings = None.None.DateStamp.Increment
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -27,5 +18,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(AutomaticVersions) = postSolution
+		AssemblyInfoFilePath.Release|Any CPU = Properties\AssemblyInfo.cs
+		UpdateAssemblyVersion.Release|Any CPU = True
+		UpdateAssemblyFileVersion.Release|Any CPU = True
+		UpdateAssemblyInfoVersion.Release|Any CPU = True
+		AssemblyVersionSettings.Release|Any CPU = None.None.DateStamp.Increment
+		AssemblyFileVersionSettings.Release|Any CPU = None.None.DateStamp.Increment
+		AssemblyInfoVersionSettings.Release|Any CPU = None.None.DateStamp.Increment
 	EndGlobalSection
 EndGlobal

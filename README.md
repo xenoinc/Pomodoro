@@ -24,37 +24,16 @@ More information can be found at [PomodoroTechnique.com](http://pomodorotechniqu
 1. If you have less than four checkmarks, take a short break (3–5 minutes), then go to step 1
 1. Else (i.e. after four pomodoros) take a longer break (15–30 minutes), reset your check mark count to zero, then go to step 1
 
-# Building ToDoList Plugins
-
-<https://github.com/abstractspoon/ToDoList_Plugins>
-
-**Steps for building/running ImportExport solution for the first time**
-
-1. Clone the repo cleanly
-2. Build the SampleImpExp solution as-is (SampleImpExpCore should be the active project)
-3. Close all other instances of ToDoList
-4. Run the solution as-is which will display an error saying ToDoList.exe could not be found.
-5. Copy just ToDoList.exe to the location in the error message. DO NOT MODIFY THE PATH IN THE PROJECT FILE.
-6. Re-run the solution and ToDoList should now appear
-7. 'Tools > Export Tasks' and 'Sample (.smp)' should appear in the 'Format' droplist
-
-
-# TDL-Pomodoro
-
-One day, I'll add this plug-in for ToDoList by Abstractspoon (_GREAT UTILITY_).
-
-## Project Goals
-The simple go is to create a Pomodoro Timer (Tomato Timer) which can be used with the ToDoList application  
-
 
 # Change Log
 
-### 1.1.17091.43
+### 1.1.17091.48
 * Chime fixes
 * Added some lost code from late January and February. Forgot to PUSH & drive became corrupted.
 * Holy crap this thing is much more pretty now!
 * Added GUI notifications to flash symbols on the screen during state changes.
     * Useful for when audio is unavailable. The old MsgBox was an annoying modal.
+    * Notification window is topmost during flashes
     
 ### 1.1.17011.3
 * Added chime sounds to end of 25min run.
