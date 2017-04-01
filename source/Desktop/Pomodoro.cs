@@ -2,18 +2,17 @@
  * Author: Damian Suess
  * Description:
  *  Cheap pomodoro timer
- * 
+ *
  * To Do:
  *  [ ] Move the Application.Run to its own file
  *  [ ] Clean up the code.. other people have to look at this. This is ugly
- * 
+ *
  * Change Log:
  *  2016-0111 + [DJS] Added sound and repeatable. Cleaned up code.
  *  2015-0106 + [DJS] Updated tray icon., old one was unreadable & ugly
  */
 
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace Pomodoro
@@ -39,10 +38,10 @@ namespace Pomodoro
     private const int PomorodoMinutesToWait = 25;
     private const int ShortBreakMinutesToWait = 5;
     private const int LongBreakMinutesToWait = 15;
-    
 
     // Create a new app settings feature for this
     private bool _settingPlaySound = true;
+
     private bool _settingShowMsgBox = false;
 
     #region Initialization
@@ -92,7 +91,6 @@ namespace Pomodoro
       _trayMenu.MenuItems.Add("Exit", OnExit);
     }
 
-
     private void DefaultIcon()
     {
       string iconChar = "Σ";
@@ -123,6 +121,7 @@ namespace Pomodoro
     private void OnStartPomodoro(object sender, EventArgs e)
     {
       StartTimer(PomorodoMinutesToWait);
+      NotifyStateChange(TimerState.Start);
       ShowRunningMenu();
     }
 
@@ -140,12 +139,16 @@ namespace Pomodoro
 
     private void OnTogglePause(object sender, EventArgs e)
     {
-      ToggleTimerPaused();
+      if (ToggleTimerPaused())
+        NotifyStateChange(TimerState.Pause);
+      else
+        NotifyStateChange(TimerState.Start);
     }
 
     private void OnStop(object sender, EventArgs e)
     {
       StopTimer();
+      NotifyStateChange(TimerState.Stop);
       ShowStoppedMenu();
     }
 
@@ -166,7 +169,39 @@ namespace Pomodoro
       base.Dispose(isDisposing);
     }
 
-    #endregion Actions
+    #endregion Event Handlers
+
+    #region State Change Notifications
+
+    private void NotifyStateChange(TimerState state)
+    {
+      //TODO: Create animations on background thread
+      switch (state)
+      {
+        case TimerState.Start:
+          // Single flash alpha-trans form on screen
+          PlaySound(1);
+          break;
+
+        case TimerState.Pause:
+          // Fade in alpha-trans form as "pause" (2 rectangle forms)
+          break;
+
+        case TimerState.Stop:
+          // Fade in alpha-trans form as square
+          break;
+
+        case TimerState.Done:
+          // Double flash alpha-trans form on screen
+          // 25%->50%->75%->50%->75%->25%
+          PlaySound(3);
+          break;
+
+        default: break;
+      }
+    }
+
+    #endregion State Change Notifications
 
     #region Timers
 
@@ -190,7 +225,9 @@ namespace Pomodoro
       DefaultIcon();
     }
 
-    private void ToggleTimerPaused()
+    /// <summary>Pause or resume timer</summary>
+    /// <returns>Returns true if paused</returns>
+    private bool ToggleTimerPaused()
     {
       _running = !_running;
 
@@ -198,16 +235,16 @@ namespace Pomodoro
       {
         TextIcon newIcon = new Pomodoro.TextIcon("||");
         _trayIcon.Icon = newIcon.Get();
-
         _trayMenu.MenuItems[4].Text = "Resume";
+        return true;
       }
       else
       {
         int minutesRemaining = _minutesToWait - (_elapsedTime / 60 / 1000);
         SetTextIcon(minutesRemaining);
         _trayMenu.MenuItems[4].Text = "Pause";
+        return false;
       }
-
     }
 
     private void TimerFired(object sender, System.Timers.ElapsedEventArgs e)
@@ -222,9 +259,9 @@ namespace Pomodoro
         {
           StopTimer();
           ShowStoppedMenu();
-          
+
           PlaySound(3);
-          
+
           if (_settingShowMsgBox)
             MessageBox.Show("Time's up!", "Pomodoro Timer", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         }
@@ -235,8 +272,8 @@ namespace Pomodoro
         }
       }
     }
-    
-    #endregion
+
+    #endregion Timers
 
     #region Private Methods
 
@@ -262,9 +299,9 @@ namespace Pomodoro
       _trayMenu.MenuItems[5].Enabled = true;
     }
 
-    private void PlaySound(uint repeat=1)
+    private void PlaySound(uint repeat = 1)
     {
-      if (_settingPlaySound)
+      if (!_settingPlaySound)
         return;
 
       try
@@ -273,10 +310,10 @@ namespace Pomodoro
         {
           System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
           System.IO.Stream s = a.GetManifestResourceStream("Pomodoro.chime.wav");
-          
+
           // Place in a "using" and called via, PlaySync() so that we can call the sound multiple times
           using (System.Media.SoundPlayer player = new System.Media.SoundPlayer(s))
-          { 
+          {
             player.PlaySync();
           }
 
