@@ -22,11 +22,11 @@ namespace Pomodoro
 {
   public class PomodoroTimer : Form
   {
-    [STAThread]
-    public static void Main()
-    {
-      Application.Run(new PomodoroTimer());
-    }
+    //[STAThread]
+    //public static void Main()
+    //{
+    //  Application.Run(new PomodoroTimer());
+    //}
 
     private NotifyIcon _trayIcon;
     private ContextMenu _trayMenu;
