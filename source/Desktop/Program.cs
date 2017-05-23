@@ -3,10 +3,10 @@
  * Date:    2017-5-23
  * File:    Program.cs
  * Description:
- *  
- * To Do:
+ *  Entry point
+ * 
  * Change Log:
- *  2017-523 * Initial creation
+ *  2017-0523 * Initial creation
  */
 
 using System;
