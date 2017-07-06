@@ -10,6 +10,7 @@
  */
 
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Squirrel;
 
@@ -21,10 +22,28 @@ namespace Pomodoro
     [STAThread]
     static void Main()
     {
+
+      // Method 1
+      Task.Run(async () =>
+        {
+          using (var mgr = new UpdateManager(@"C:\work\lab\Pomodoro\bin", "Pomodoro"))
+          {
+            await mgr.UpdateApp();
+          }
+        });
+
+      // Method 2.A
       SquirrelAwareApp.HandleEvents(
         onAppUpdate: UpdaterForm.OnAppUpdate,
         onAppUninstall: UpdaterForm.OnAppUninstall,
         onInitialInstall: UpdaterForm.OnInitialInstall);
+
+      // Method 2.B
+      SquirrelAwareApp.HandleEvents(ver =>
+      {
+        var mggr = default(UpdateManager);
+        mggr.CreateShortcutsForExecutable("exeName", ShortcutLocation.Desktop, true);
+      });
 
       Application.Run(new PomodoroTimer());
     }

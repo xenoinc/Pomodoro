@@ -23,9 +23,18 @@ namespace Pomodoro
 {
   public partial class UpdaterForm : Form
   {
+
+    private string _updatePath = @"C:\work\lab\Pomodoro\bin";
+    private string _packageId = @"Pomodoro";
     public UpdaterForm()
     {
       InitializeComponent();
+
+      _updatePath = Data.Constants.UpdateURI;
+
+      // Pull from config file?
+      //_updatePath = ConfigurationManager.AppSettings["UpdatePathFolder"];
+      //_packageId = ConfigurationManager.AppSettings["PackageID"];
     }
 
     private void UpdaterForm_Load(object sender, EventArgs e)
@@ -42,35 +51,44 @@ namespace Pomodoro
 
     public async Task UpdateApp()
     {
-      //var updatePath = ConfigurationManager.AppSettings["UpdatePathFolder"];
-      //var packageId = ConfigurationManager.AppSettings["PackageID"];
-      //
-      //using (var mgr = new UpdateManager(updatePath, packageId, FrameworkVersion.Net45))
-      //{
-      //  var updates = await mgr.CheckForUpdate();
-      //  if (updates.ReleasesToApply.Any())
-      //  {
-      //    var lastVersion = updates.ReleasesToApply.OrderBy(x => x.Version).Last();
-      //    await mgr.DownloadReleases(new[] { lastVersion });
-      //    await mgr.ApplyReleases(updates);
-      //    await mgr.UpdateApp();
-      //
-      //    MessageBox.Show("The application has been updated - please close and restart.");
-      //  }
-      //  else
-      //  {
-      //    MessageBox.Show("No Updates are available at this time.");
-      //  }
-      //}
+      Console.WriteLine("UpdateApp()");
+      
+
+      using (var mgr = new UpdateManager(_updatePath, _packageId))
+      {
+        var updates = await mgr.CheckForUpdate();
+        if (updates.ReleasesToApply.Any())
+        {
+          var lastVersion = updates.ReleasesToApply.OrderBy(x => x.Version).Last();
+
+          // User already knows, no need to prompt if they wish to continue
+
+          await mgr.DownloadReleases(new[] { lastVersion });
+          await mgr.ApplyReleases(updates);
+          await mgr.UpdateApp();
+
+          MessageBox.Show("The application has been updated - please close and restart.");
+        }
+        else
+        {
+          MessageBox.Show("You are running the most recent version.");
+        }
+      }
     }
 
     public static void OnAppUpdate(Version version)
     {
       // Could use this to do stuff here too.
+      Console.WriteLine("OnAppUpdate() - ver: " + version.ToString());
+      
     }
 
+    /// <summary>First time running. Show the settings dialog</summary>
+    /// <param name="version"></param>
     public static void OnInitialInstall(Version version)
     {
+      Console.WriteLine("OnInitialInstall() - ver: " + version.ToString());
+
       //var exePath = Assembly.GetEntryAssembly().Location;
       //string appName = Path.GetFileName(exePath);
       //
@@ -86,6 +104,7 @@ namespace Pomodoro
 
     public static void OnAppUninstall(Version version)
     {
+      Console.WriteLine("OnAppUninstall() - ver: " + version.ToString());
       //var exePath = Assembly.GetEntryAssembly().Location;
       //string appName = Path.GetFileName(exePath);
       //
