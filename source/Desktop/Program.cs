@@ -4,7 +4,7 @@
  * File:    Program.cs
  * Description:
  *  Entry point
- * 
+ *
  * Change Log:
  *  2017-0523 * Initial creation
  */
@@ -16,17 +16,22 @@ using Squirrel;
 
 namespace Pomodoro
 {
-  
-  static class Program
+  internal static class Program
   {
-    [STAThread]
-    static void Main()
-    {
+#if DEBUG
+    private const string UpdatePath = @"C:\work\lab\Pomodoro\bin";
+#else
+    private const string UpdatePath = "https://software.xenoinc.com/pomodoro";
+#endif
 
+    [STAThread]
+    private static void Main()
+    {
       // Method 1
       Task.Run(async () =>
         {
-          using (var mgr = new UpdateManager(@"C:\work\lab\Pomodoro\bin", "Pomodoro"))
+          //using (var mgr = new UpdateManager(UpdatePath, "Pomodoro"))
+          using (var mgr = new UpdateManager(UpdatePath))
           {
             await mgr.UpdateApp();
           }
