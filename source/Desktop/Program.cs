@@ -18,11 +18,7 @@ namespace Pomodoro
 {
   internal static class Program
   {
-#if DEBUG
-    private const string UpdatePath = @"C:\work\lab\Pomodoro\bin";
-#else
-    private const string UpdatePath = "https://software.xenoinc.com/pomodoro";
-#endif
+
 
     [STAThread]
     private static void Main()
@@ -31,7 +27,7 @@ namespace Pomodoro
       Task.Run(async () =>
         {
           //using (var mgr = new UpdateManager(UpdatePath, "Pomodoro"))
-          using (var mgr = new UpdateManager(UpdatePath))
+          using (var mgr = new UpdateManager(Constants.UpdatePath))
           {
             await mgr.UpdateApp();
           }

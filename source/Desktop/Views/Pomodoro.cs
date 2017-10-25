@@ -91,7 +91,10 @@ namespace Pomodoro
       _trayMenu.MenuItems.Add("Pause", OnTogglePause);
       _trayMenu.MenuItems.Add("Stop", OnStop);
       _trayMenu.MenuItems.Add("-");
+      _trayMenu.MenuItems.Add("About", OnAbout);
       _trayMenu.MenuItems.Add("Exit", OnExit);
+
+      _trayMenu.MenuItems[0].DefaultItem = true;
     }
 
     private void DefaultIcon()
@@ -157,6 +160,16 @@ namespace Pomodoro
       StopTimer();
       NotifyStateChange(TimerState.Stop);
       ShowStoppedMenu();
+    }
+
+    private void OnAbout(object sender, EventArgs e)
+    {
+      string desc = "Pomodoro Timer for Desktop" + System.Environment.NewLine +
+                    "Version: " + System.Reflection.Assembly.GetEntryAssembly().GetName().Version + System.Environment.NewLine +
+                    System.Environment.NewLine +
+                    "Copyright 2017 Xeno Innovations" + System.Environment.NewLine +
+                    "Open Source: https://github.com/xenoinc/Pomodoro" + System.Environment.NewLine;
+      MessageBox.Show(desc, "About Pomodoro");
     }
 
     private void OnExit(object sender, EventArgs e)
