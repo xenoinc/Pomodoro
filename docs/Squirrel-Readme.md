@@ -3,6 +3,27 @@ Pomodoro uses Squirrel for distribution and updating
 See details on [Squirrel Installer](https://github.com/Squirrel/Squirrel.Windows/blob/master/docs/getting-started/0-overview.md
 )
 
+## Integrating Squirrel
+Reference: [Integrating Squirrel](https://github.com/Squirrel/Squirrel.Windows/blob/master/docs/getting-started/1-integrating.md)
+
+### Install Squirrel
+
+```powershell
+PM> Install-Package Squirrel.Windows
+```
+
+### Implementing
+
+```cs
+using Squirrel;
+...
+using (var mgr = new UpdateManager("C:\\Projects\\MyApp\\Releases"))
+{
+    await mgr.UpdateApp();
+}
+```
+
+
 ## Creating new package
 
 ### Building
@@ -52,5 +73,5 @@ See also [Squirrel's Updating](https://github.com/Squirrel/Squirrel.Windows/blob
 ```
 PM> pwd
 PM> cd ..
-PM> Squirrel --releasify Squirrel Pomodoro.1.1.51.nupkg
+PM> Squirrel --releasify Pomodoro.1.1.51.nupkg
 ```
