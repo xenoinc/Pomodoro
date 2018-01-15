@@ -1,0 +1,22 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+    <!-- Project details -->
+    <ProjectName>Pomodoro</ProjectName>
+    <SolutionName>$(ProjectName).sln</SolutionName>
+
+		<!-- Static Folders -->
+		<ProjectBase>$(MSBuildProjectDirectory)</ProjectBase>
+		<ResourcePath>$(ProjectBase)\resource</ResourcePath>
+		<SourcePath>$(ProjectBase)\source</SourcePath>
+		<BuildTools>$(ProjectBase)\Tools</BuildTools>
+		<OutputFolder>$(ProjectBase)\output</OutputFolder>
+
+    <MainExe>$(ProjectBase)\output\$(ProjectName).exe</MainExe>
+		<SquirrelReleasePath>$(ProjectBase)\Releases</SquirrelReleasePath>
+    
+		<!-- Build Configuration Parameters-->
+		<Configuration>Release</Configuration>
+		<Platform>Any CPU</Platform>		
+
+  </PropertyGroup>
+</Project>
