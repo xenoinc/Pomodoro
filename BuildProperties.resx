@@ -1,0 +1,24 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Project details -->
+    <ProjectName>Pomodoro</ProjectName>
+    <SolutionName>$(ProjectName).sln</SolutionName>
+
+    <!-- Borrowed from resource\CMF\build\FrameworkProperties.resx -->
+    <!-- Static Folders -->
+    <ProjectBase>$(MSBuildProjectDirectory)</ProjectBase>
+    <ResourcePath>$(ProjectBase)\resource</ResourcePath>
+    <SourcePath>$(ProjectBase)\source</SourcePath>
+    <BuildTools>c:\BuildTools</BuildTools>
+    <OutputFolder>$(ProjectBase)\bin</OutputFolder>
+
+    <MainExe>$(ProjectBase)\bin\$(ProjectName).exe</MainExe>
+    <SquirrelReleasePath>$(ProjectBase)\Releases</SquirrelReleasePath>
+    <SquirrelReleasePathBeta>$(ProjectBase)\Releases-Beta</SquirrelReleasePathBeta>
+
+    <!-- Build Configuration Parameters-->
+    <Configuration>Release</Configuration>
+    <Platform>Any CPU</Platform>		
+
+  </PropertyGroup>
+</Project>
