@@ -9,7 +9,7 @@
  *  2017-523 * Initial creation
  */
 
-namespace Pomodoro
+namespace Xeno.Pomodoro
 {
   partial class UpdaterForm
   {
