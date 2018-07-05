@@ -18,9 +18,9 @@ More information can be found at [PomodoroTechnique.com](http://pomodorotechniqu
 ## Six stages in the technique:
 
 1. Decide on the task to be done
-1. Set the pomodoro timer to n minutes (traditionally n = 25)[1]
+1. Set the pomodoro timer to n minutes (traditionally n = 25)
 1. Work on the task until the timer rings. If a distraction pops into  your head, write it down, but immediately get back on task.
-1. After the timer rings, put a checkmark on a piece of paper[7]
+1. After the timer rings, put a checkmark on a piece of paper
 1. If you have less than four checkmarks, take a short break (3–5 minutes), then go to step 1
 1. Else (i.e. after four pomodoros) take a longer break (15–30 minutes), reset your check mark count to zero, then go to step 1
 
