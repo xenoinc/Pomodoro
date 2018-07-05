@@ -155,7 +155,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>COPY "$(TargetPath)" "C:\Prog\XenoLabs\$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>IF EXIST "$(TargetDir)\..\debugkey" (
+
+  IF NOT EXIST "C:\Prog\XenoLabs\" ( MKDIR "C:\Prog\XenoLabs" )
+  IF NOT EXIST "C:\Prog\XenoLabs\Pomodoro\" ( MKDIR "C:\Prog\XenoLabs\Pomodoro" )
+
+  COPY "$(TargetPath)" "C:\Prog\XenoLabs\Pomodoro\$(TargetFileName)"
+  COPY "$(TargetDir)\*.dll" "C:\Prog\XenoLabs\Pomodoro"
+)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
