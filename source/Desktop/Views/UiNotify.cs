@@ -4,9 +4,11 @@
  * File:    UiNotify.cs
  * Description:
  *  Animate screen notifications and shapes
+ *
  * TO DO:
  *  [ ] Operate on Background worker thread
  *  [ ] Pause: Make sizes dynamic (from frm.Size) if we don't like 300x300
+ *
  * Change Log:
  *  2017-0401 * Initial creation
  */
@@ -18,7 +20,7 @@ using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Pomodoro
+namespace Xeno.Pomodoro
 {
   public static class UiNotify
   {

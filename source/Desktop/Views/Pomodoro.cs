@@ -18,7 +18,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace Pomodoro
+namespace Xeno.Pomodoro
 {
   public class PomodoroTimer : Form
   {
@@ -27,6 +27,10 @@ namespace Pomodoro
     //{
     //  Application.Run(new PomodoroTimer());
     //}
+
+    private const int PomorodoMinutesToWait = 25;
+    private const int ShortBreakMinutesToWait = 5;
+    private const int LongBreakMinutesToWait = 15;
 
     private NotifyIcon _trayIcon;
     private ContextMenu _trayMenu;
@@ -37,10 +41,6 @@ namespace Pomodoro
     private bool _running = false;
     private int _elapsedTime = 0;
     private int _minutesToWait;
-
-    private const int PomorodoMinutesToWait = 25;
-    private const int ShortBreakMinutesToWait = 5;
-    private const int LongBreakMinutesToWait = 15;
 
     // Create a new app settings feature for this
     private bool _settingPlaySound = true;
@@ -127,6 +127,17 @@ namespace Pomodoro
       base.OnLoad(e);
     }
 
+    protected override void Dispose(bool isDisposing)
+    {
+      if (isDisposing)
+      {
+        // Release the icon resource.
+        _trayIcon.Dispose();
+      }
+
+      base.Dispose(isDisposing);
+    }
+
     private void OnStartPomodoro(object sender, EventArgs e)
     {
       StartTimer(PomorodoMinutesToWait);
@@ -176,17 +187,6 @@ namespace Pomodoro
     {
       if (_timer != null) _timer.Stop();
       Application.Exit();
-    }
-
-    protected override void Dispose(bool isDisposing)
-    {
-      if (isDisposing)
-      {
-        // Release the icon resource.
-        _trayIcon.Dispose();
-      }
-
-      base.Dispose(isDisposing);
     }
 
     #endregion Event Handlers

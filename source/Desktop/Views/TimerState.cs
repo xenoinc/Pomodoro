@@ -3,12 +3,13 @@
  * Date:    2017-4-1
  * File:    TimerState.cs
  * Description:
+ *  Timer states
  *
  * Change Log:
  *  2017-0401 * Initial creation
  */
 
-namespace Pomodoro
+namespace Xeno.Pomodoro
 {
   public enum TimerState
   {
