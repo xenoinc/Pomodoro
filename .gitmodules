@@ -1,0 +1,3 @@
+[submodule "tools/ToDoList_Plugins"]
+	path = tools/ToDoList_Plugins
+	url = https://github.com/abstractspoon/ToDoList_Plugins.git
