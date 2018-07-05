@@ -9,7 +9,7 @@
 using System;
 using System.Drawing;
 
-namespace Pomodoro
+namespace Xeno.Pomodoro
 {
   public class TextIcon
   {
@@ -29,11 +29,6 @@ namespace Pomodoro
       _icon = Icon.FromHandle(hIcon);
     }
 
-    public Icon Get()
-    {
-      return _icon;
-    }
-
     ~TextIcon()
     {
       _icon = null;
@@ -42,6 +37,11 @@ namespace Pomodoro
       _bitmap = null;
       _brushAccent = null;
       _brushColor = null;
+    }
+
+    public Icon Get()
+    {
+      return _icon;
     }
   }
 }

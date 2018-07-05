@@ -26,6 +26,10 @@ More information can be found at [PomodoroTechnique.com](http://pomodorotechniqu
 
 
 # Change Log
+
+### 1.1.52
+* Updated namespace and refactored code
+
 ### 1.1.51
 * Updated Version system to use SemVer (Major.Minor.Patch). More info at, http://semver.org/.
 * Fully integrated Squirrel updater.
@@ -44,3 +48,7 @@ More information can be found at [PomodoroTechnique.com](http://pomodorotechniqu
     
 ### 1.0 - 2016
 * Basic features. Needed a quick timer project pronto
+
+### 0.x - 2016:
+* Fixed TrayIcon to an easy to view color w/ backdrop
+* Fixed initial application launch TrayIcon (unset previously)

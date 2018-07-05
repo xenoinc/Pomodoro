@@ -14,24 +14,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Squirrel;
 
-namespace Pomodoro
+namespace Xeno.Pomodoro
 {
   internal static class Program
   {
-
-
     [STAThread]
     private static void Main()
     {
       // Method 1
       Task.Run(async () =>
+      {
+        //using (var mgr = new UpdateManager(UpdatePath, "Pomodoro"))
+        using (var mgr = new UpdateManager(Data.Constants.UpdatePath))
         {
-          //using (var mgr = new UpdateManager(UpdatePath, "Pomodoro"))
-          using (var mgr = new UpdateManager(Constants.UpdatePath))
-          {
-            await mgr.UpdateApp();
-          }
-        });
+          await mgr.UpdateApp();
+        }
+      });
 
       // Method 2.A
       SquirrelAwareApp.HandleEvents(

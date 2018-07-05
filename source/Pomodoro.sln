@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopTimer", "Desktop\DesktopTimer.csproj", "{26DBD944-1A0C-4F4D-9208-81614680BEB0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xeno.Pomodoro", "Desktop\Xeno.Pomodoro.csproj", "{26DBD944-1A0C-4F4D-9208-81614680BEB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +18,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E8406299-86A4-49E7-A682-DC80067179CC}
 	EndGlobalSection
 	GlobalSection(AutomaticVersions) = postSolution
 		UpdateAssemblyVersion.Release|Any CPU = False

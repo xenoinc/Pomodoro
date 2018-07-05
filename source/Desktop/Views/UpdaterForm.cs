@@ -4,28 +4,28 @@
  * File:    UpdaterForm.cs
  * Description:
  *  Updater form
+ *
  * To Do:
  *  [ ] Finish me
+ *
  * Change Log:
  *  2017-523 * Initial creation
  */
 
 using System;
 using System.Data;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Squirrel;
 
-namespace Pomodoro
+namespace Xeno.Pomodoro
 {
   public partial class UpdaterForm : Form
   {
-
     private string _updatePath = @"C:\work\lab\Pomodoro\bin";
     private string _packageId = @"Pomodoro";
+
     public UpdaterForm()
     {
       InitializeComponent();
@@ -52,7 +52,6 @@ namespace Pomodoro
     public async Task UpdateApp()
     {
       Console.WriteLine("UpdateApp()");
-      
 
       using (var mgr = new UpdateManager(_updatePath, _packageId))
       {
@@ -80,7 +79,6 @@ namespace Pomodoro
     {
       // Could use this to do stuff here too.
       Console.WriteLine("OnAppUpdate() - ver: " + version.ToString());
-      
     }
 
     /// <summary>First time running. Show the settings dialog</summary>
