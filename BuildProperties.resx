@@ -4,7 +4,6 @@
     <ProjectName>Pomodoro</ProjectName>
     <SolutionName>$(ProjectName).sln</SolutionName>
 
-    <!-- Borrowed from resource\CMF\build\FrameworkProperties.resx -->
     <!-- Static Folders -->
     <ProjectBase>$(MSBuildProjectDirectory)</ProjectBase>
     <ResourcePath>$(ProjectBase)\resource</ResourcePath>
@@ -19,6 +18,5 @@
     <!-- Build Configuration Parameters-->
     <Configuration>Release</Configuration>
     <Platform>Any CPU</Platform>		
-
   </PropertyGroup>
 </Project>

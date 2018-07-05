@@ -57,7 +57,6 @@
       <SemanticVersion>$([System.Version]::Parse(%(AppAssembly.Version)).ToString(3))</SemanticVersion>
       <NuSpecPath>$(OutputFolder)\$(ProjectName).$(SemanticVersion).nupkg</NuSpecPath>
 
-      <!-- <NuGetCmd>"%(NuGetExe.FullPath)" pack "$(SourcePath)\$(ProjectName)\Pomodoro.nuspec" -Version $(SemanticVersion) -Properties "Configuration=Release" -OutputDirectory "$(OutputFolder)" -BasePath "$(OutputFolder)"</NuGetCmd> -->
       <NuGetCmd>"%(NuGetExe.FullPath)" pack "Pomodoro.nuspec" -Version $(SemanticVersion) -Properties "Configuration=Release" -OutputDirectory "$(OutputFolder)" -BasePath "$(OutputFolder)"</NuGetCmd>
       <SquirrelCmd>"%(SquirrelExe.FullPath)" --releasify "$(OutputFolder)\$(ProjectName).$(SemanticVersion).nupkg" --releaseDir="$(SquirrelReleasePath)"</SquirrelCmd>
     </PropertyGroup>
