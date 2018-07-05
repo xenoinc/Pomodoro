@@ -25,7 +25,7 @@ namespace Xeno.Pomodoro
       Task.Run(async () =>
       {
         //using (var mgr = new UpdateManager(UpdatePath, "Pomodoro"))
-        using (var mgr = new UpdateManager(Data.Constants.UpdatePath))
+        using (var mgr = new UpdateManager(Helpers.Constants.UpdatePath))
         {
           await mgr.UpdateApp();
         }

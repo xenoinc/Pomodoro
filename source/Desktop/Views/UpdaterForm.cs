@@ -30,7 +30,7 @@ namespace Xeno.Pomodoro
     {
       InitializeComponent();
 
-      _updatePath = Data.Constants.UpdateURI;
+      _updatePath = Helpers.Constants.UpdateURI;
 
       // Pull from config file?
       //_updatePath = ConfigurationManager.AppSettings["UpdatePathFolder"];

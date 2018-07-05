@@ -101,7 +101,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Constants.cs" />
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Views\UiNotify.cs" />
     <Compile Include="Views\Pomodoro.cs">
