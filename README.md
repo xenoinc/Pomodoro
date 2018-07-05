@@ -27,7 +27,7 @@ More information can be found at [PomodoroTechnique.com](http://pomodorotechniqu
 
 # Change Log
 
-### 1.1.52
+### 1.2.52
 * Updated namespace and refactored code
 
 ### 1.1.51
