@@ -9,6 +9,8 @@
  *  2018-0705 * Initial creation
  */
 
+using Xeno.Pomodoro.Data.Settings;
+
 namespace Xeno.Pomodoro.Helpers
 {
   public static class Settings
@@ -18,10 +20,15 @@ namespace Xeno.Pomodoro.Helpers
     public static readonly bool IsFirstRunDefault = true;
     public static readonly bool PlaySoundsDefault = true;
     public static readonly bool SendStatisticsDefault = true;
-
     public static readonly int TimerLongBreakDefault = 15;
     public static readonly int TimerPomodoroDefault = 25;
     public static readonly int TimerShortBreakDefault = 5;
+
+    public static string AQuickTest
+    {
+      get => AppSettings.GetValueOrDefault(nameof(AQuickTest), string.Empty);
+      set => AppSettings.AddOrUpdateValue(nameof(AQuickTest), value);
+    }
 
     /// <summary>Automatically check for updates on startup</summary>
     public static bool AutoUpdates { get; set; }
@@ -43,5 +50,16 @@ namespace Xeno.Pomodoro.Helpers
     public static int TimerPomodoro { get; set; }
 
     public static int TimerShortBreak { get; set; }
+
+    private static ISettings AppSettings => CrossSettings.Current;
+
+    public static void RemoveAllSettings()
+    {
+      System.IO.IsolatedStorage.IsolatedStorageFile store = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForDomain();
+      
+      // Deletes entire store
+      //  https://docs.microsoft.com/en-us/dotnet/standard/io/how-to-delete-stores-in-isolated-storage
+      store.Remove();
+    }
   }
 }

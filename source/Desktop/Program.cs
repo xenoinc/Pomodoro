@@ -21,6 +21,8 @@ namespace Xeno.Pomodoro
     [STAThread]
     private static void Main()
     {
+      TestSettings();
+
       // Method 1
       Task.Run(async () =>
       {
@@ -45,6 +47,48 @@ namespace Xeno.Pomodoro
       });
 
       Application.Run(new PomodoroTimer());
+    }
+
+    private static void TestSettings()
+    {
+      System.IO.IsolatedStorage.IsolatedStorageFile store = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForDomain();
+
+      long size = store.UsedSize;
+
+
+      foreach (var dirName in store.GetDirectoryNames())
+      {
+        MessageBox.Show("Dir: " + dirName);
+      }
+
+      foreach (var file in store.GetFileNames())
+      {
+        MessageBox.Show("File: " + file);
+      }
+
+      // Deletes entire store - Use for Unisntaller
+      //  https://docs.microsoft.com/en-us/dotnet/standard/io/how-to-delete-stores-in-isolated-storage
+      //store.Remove();
+
+
+      //// Delete
+      //Helpers.Settings.AQuickTest = null;
+      //
+      ////Create tests
+      //string test = Helpers.Settings.AQuickTest;
+      //if (test == string.Empty)
+      //{
+      //  MessageBox.Show("Empty");
+      //  Helpers.Settings.AQuickTest = "1";
+      //}
+      //else
+      //{
+      //  int num;
+      //  int.TryParse(test, out num);
+      //  MessageBox.Show(num.ToString());
+      //  num++;
+      //  Helpers.Settings.AQuickTest = num.ToString();
+      //}
     }
   }
 }
