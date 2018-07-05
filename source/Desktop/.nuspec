@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Pomodoro</id>
+    <version>1.0.0.0</version>
+    <authors>Damian Suess</authors>
+    <title>Pomodoro Desktop Timer</title>
+    <description>Pomodoro Desktop Timer</description>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <releaseNotes>None</releaseNotes>
+    <copyright>Copyright 2017 Xeno Innovations</copyright>
+  </metadata>
+  <files>
+    <file src="bin\Debug\*.*" target="lib\net45\"></file>
+  </files>
+</package>

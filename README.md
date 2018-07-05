@@ -26,6 +26,10 @@ More information can be found at [PomodoroTechnique.com](http://pomodorotechniqu
 
 
 # Change Log
+### 1.1.51
+* Updated Version system to use SemVer (Major.Minor.Patch). More info at, http://semver.org/.
+* Fully integrated Squirrel updater.
+* Improperly setting update folder (for initial testing).
 
 ### 1.1.17091.48
 * Chime fixes

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.12
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopTimer", "Desktop\DesktopTimer.csproj", "{26DBD944-1A0C-4F4D-9208-81614680BEB0}"
 EndProject
@@ -20,12 +20,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(AutomaticVersions) = postSolution
-		AssemblyInfoFilePath.Release|Any CPU = Properties\AssemblyInfo.cs
-		UpdateAssemblyVersion.Release|Any CPU = True
-		UpdateAssemblyFileVersion.Release|Any CPU = True
-		UpdateAssemblyInfoVersion.Release|Any CPU = True
-		AssemblyVersionSettings.Release|Any CPU = None.None.DateStamp.Increment
-		AssemblyFileVersionSettings.Release|Any CPU = None.None.DateStamp.Increment
-		AssemblyInfoVersionSettings.Release|Any CPU = None.None.DateStamp.Increment
+		UpdateAssemblyVersion.Release|Any CPU = False
+		UpdateAssemblyFileVersion.Release|Any CPU = False
+		UpdateAssemblyInfoVersion.Release|Any CPU = False
+		ShouldCreateLogs.Release|Any CPU = True
+		AdvancedSettingsExpanded.Release|Any CPU = True
 	EndGlobalSection
 EndGlobal
