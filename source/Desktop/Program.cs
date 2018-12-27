@@ -21,7 +21,7 @@ namespace Xeno.Pomodoro
     [STAThread]
     private static void Main()
     {
-      TestSettings();
+      // TestSettings();
 
       // Method 1
       Task.Run(async () =>
