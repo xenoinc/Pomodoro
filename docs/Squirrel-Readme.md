@@ -33,7 +33,7 @@ using (var mgr = new UpdateManager("C:\\Projects\\MyApp\\Releases"))
 
 1. Open .\Pomodoro.nuspec
 2. Make sure version info matches our output (_1.1.49_)
-    * Must use _MAJOR.MINOR.PATCH_ format  
+    * Must use _MAJOR.MINOR.PATCH_ format
 3. Include all files from **.\bin**
 4. Save package (_Pomodoro.1.1.49.nupkg_) to root
 
@@ -75,3 +75,20 @@ PM> pwd
 PM> cd ..
 PM> Squirrel --releasify Pomodoro.1.1.51.nupkg
 ```
+
+## Loading GIF
+Squirrel installers don't have any UI - the goal of a Squirrel installer is to install so blindingly fast that double-clicking on Setup.exe *feels* like double-clicking on an app shortcut. Make your installer **fast**.
+
+However, for large applications, this isn't possible. For these apps, Squirrel will optionally display a graphic as a "splash screen" while installation is processing, but only if installation takes more than a pre-set amount of time. This will be centered, backed by a transparent window, and can optionally be an animated GIF. Specify this via the `-g` parameter.
+
+```powershell
+PM> Squirrel --releasify MyApp.1.0.0.nupkg -g .\loading.gif
+```
+
+## See Also
+* [Squirrel Command Line](squirrel-command-line.md) - command line options for `Squirrel --releasify`
+
+
+---
+| Return: [Table of Contents](../readme.md) |
+|----|
