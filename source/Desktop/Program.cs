@@ -10,6 +10,7 @@
  */
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Squirrel;
@@ -18,14 +19,35 @@ namespace Xeno.Pomodoro
 {
   internal static class Program
   {
+    private static Mutex _mutex = null;
+
+    private static bool IsAppRunning()
+    {
+      const string appName = "Pomodoro-{8F9A823E-36F4-4381-968F-DAC35C4A08B7}";
+      string dbg = string.Empty;
+      bool createdNew;
+
+      _mutex = new Mutex(true, appName + dbg, out createdNew);
+      if (!createdNew)
+        return true;
+      else
+        return false;
+    }
+
     [STAThread]
     private static void Main()
     {
+      if (IsAppRunning())
+      {
+        return;
+      }
+      // TestSettings();
+
       // Method 1
       Task.Run(async () =>
       {
         //using (var mgr = new UpdateManager(UpdatePath, "Pomodoro"))
-        using (var mgr = new UpdateManager(Data.Constants.UpdatePath))
+        using (var mgr = new UpdateManager(Helpers.Constants.UpdatePath))
         {
           await mgr.UpdateApp();
         }
@@ -45,6 +67,46 @@ namespace Xeno.Pomodoro
       });
 
       Application.Run(new PomodoroTimer());
+    }
+
+    private static void TestSettings()
+    {
+      System.IO.IsolatedStorage.IsolatedStorageFile store = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForDomain();
+
+      long size = store.UsedSize;
+
+      foreach (var dirName in store.GetDirectoryNames())
+      {
+        MessageBox.Show("Dir: " + dirName);
+      }
+
+      foreach (var file in store.GetFileNames())
+      {
+        MessageBox.Show("File: " + file);
+      }
+
+      // Deletes entire store - Use for Unisntaller
+      //  https://docs.microsoft.com/en-us/dotnet/standard/io/how-to-delete-stores-in-isolated-storage
+      //store.Remove();
+
+      //// Delete
+      //Helpers.Settings.AQuickTest = null;
+      //
+      ////Create tests
+      //string test = Helpers.Settings.AQuickTest;
+      //if (test == string.Empty)
+      //{
+      //  MessageBox.Show("Empty");
+      //  Helpers.Settings.AQuickTest = "1";
+      //}
+      //else
+      //{
+      //  int num;
+      //  int.TryParse(test, out num);
+      //  MessageBox.Show(num.ToString());
+      //  num++;
+      //  Helpers.Settings.AQuickTest = num.ToString();
+      //}
     }
   }
 }

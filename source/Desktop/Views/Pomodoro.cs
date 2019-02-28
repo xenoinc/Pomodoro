@@ -336,7 +336,7 @@ namespace Xeno.Pomodoro
         for (uint times = 1; times <= repeat; ++times)
         {
           System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
-          System.IO.Stream s = a.GetManifestResourceStream("Pomodoro.chime.wav");
+          System.IO.Stream s = a.GetManifestResourceStream("Xeno.Pomodoro.chime.wav");
 
           // Place in a "using" and called via, PlaySync() so that we can call the sound multiple times
           using (System.Media.SoundPlayer player = new System.Media.SoundPlayer(s))
