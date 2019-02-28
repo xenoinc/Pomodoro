@@ -10,6 +10,7 @@
  */
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Squirrel;
@@ -18,9 +19,28 @@ namespace Xeno.Pomodoro
 {
   internal static class Program
   {
+    private static Mutex _mutex = null;
+
+    private static bool IsAppRunning()
+    {
+      const string appName = "Pomodoro-{8F9A823E-36F4-4381-968F-DAC35C4A08B7}";
+      string dbg = string.Empty;
+      bool createdNew;
+
+      _mutex = new Mutex(true, appName + dbg, out createdNew);
+      if (!createdNew)
+        return true;
+      else
+        return false;
+    }
+
     [STAThread]
     private static void Main()
     {
+      if (IsAppRunning())
+      {
+        return;
+      }
       // TestSettings();
 
       // Method 1
@@ -55,7 +75,6 @@ namespace Xeno.Pomodoro
 
       long size = store.UsedSize;
 
-
       foreach (var dirName in store.GetDirectoryNames())
       {
         MessageBox.Show("Dir: " + dirName);
@@ -69,7 +88,6 @@ namespace Xeno.Pomodoro
       // Deletes entire store - Use for Unisntaller
       //  https://docs.microsoft.com/en-us/dotnet/standard/io/how-to-delete-stores-in-isolated-storage
       //store.Remove();
-
 
       //// Delete
       //Helpers.Settings.AQuickTest = null;
