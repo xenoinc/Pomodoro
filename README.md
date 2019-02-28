@@ -26,6 +26,11 @@ More information can be found at [PomodoroTechnique.com](http://pomodorotechniqu
 
 
 # Change Log
+### 1.3.53
+* Added single app-instance only
+* Added base framework for settings engine
+* Fixed sound chime on transition change
+* Preparing to move to [ToolsHub](https://github.com/xenoinc/ToolsHub)
 
 ### 1.2.52
 * Updated namespace and refactored code
